@@ -33,8 +33,8 @@ public class GameObjects {
         this.y = y;
     }
     
-    public void setSprite(){
-        
+    public void setSprite(String sprite){
+        this.sprite = sprite;
     }
     
     public String getSprite(){

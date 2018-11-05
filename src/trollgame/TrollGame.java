@@ -66,7 +66,7 @@ public class TrollGame {
         map.addKeyListener(player);
         JFrame frame = new JFrame();
         frame.setSize(640, 420);
-        
+        w.get(39).isMovable();
         
         frame.add(map);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,20 +91,26 @@ public class TrollGame {
             }
 
         }
-        for(Brick b: w){
-            b.setNeighbors(w);
-        }
+       
         
         //setup player
         while(true){
         int playerPlacement = rand.nextInt(w.size());
         Brick playerBrick = w.get(playerPlacement);
         if(playerBrick.getSprite().equals(" ")){
-            player = new Player(playerBrick.getPosition()[0],playerBrick.getPosition()[1],"0",this);
+            player = new Player(playerBrick.getPosition()[0],playerBrick.getPosition()[1],
+                    "0",this);
             break;
         }
         }
 
+    }
+    
+    public void setupNeighbor(){
+         for(Brick b: w){
+            b.setNeighbors(w);
+            
+        }
     }
     
     public void update(){
