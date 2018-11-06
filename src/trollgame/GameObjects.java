@@ -1,11 +1,7 @@
 package trollgame;
 
-import java.util.ArrayList;
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *This will be the base class for all the objects in the game.
  */
 
 /**
@@ -16,6 +12,7 @@ public class GameObjects {
     private int x,y;
     private String sprite;
     
+    //
     public GameObjects(int x, int y, String sprite){
         this.x = x;
         this.y = y;
