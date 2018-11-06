@@ -7,6 +7,7 @@ package trollgame;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,7 +50,7 @@ public class TrollGame {
     //Convert varible above to char
     private final char charmap[];
     Canvas map;
-
+    int[] winningPosition = new int[2];
     ArrayList<Brick> w = new ArrayList<>();
     Player player;
     Random rand = new Random();
@@ -58,7 +59,6 @@ public class TrollGame {
     public TrollGame() {
         this.charmap = maze.toCharArray();
         map = new map();
-
         Objectsetup();
         map.setFocusable(true);
         map.addKeyListener(player);
@@ -81,6 +81,10 @@ public class TrollGame {
 
                 } else {
                     //create a new BRICK base on map appove and add it to array
+                    if(Character.toString(charmap[count]).equals("X")){
+                        winningPosition[0] = x;
+                        winningPosition[1] = y;
+                    }
                     w.add(new Brick(x, y, Character.toString(charmap[count])));
                     count++;
                 }
@@ -111,10 +115,19 @@ public class TrollGame {
         });
     }
     
+    public void checkWin(){
+        int[] playerPosition = {player.getPosition()[0],player.getPosition()[1]};
+        
+        if(Arrays.equals(playerPosition, winningPosition)){
+            System.out.println("Winner");
+        }
+    }
+    
     //update to repaint
     public void update() {
         map.validate();
         map.repaint();
+        checkWin();
     }
 
     public static void main(String[] args) {

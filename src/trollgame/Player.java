@@ -94,7 +94,8 @@ public class Player extends GameObjects implements KeyListener {
                 g.w.get(index(this.x - 1, this.y, 38, 38)).setSprite(" ");
                 g.w.get(index(this.x - 2, this.y, 38, 38)).setSprite("#");
 
-            } else if (neighbors.get(3).getSprite().equals(" ")) {
+            } else if (neighbors.get(3).getSprite().equals(" ") ||
+                    neighbors.get(3).getSprite().equals("X")) {
                 x -= 1;
                 super.setPosition(x, y);
                 g.update();
@@ -109,7 +110,8 @@ public class Player extends GameObjects implements KeyListener {
                 g.w.get(index(this.x , this.y - 1, 38, 38)).setSprite(" ");
                 g.w.get(index(this.x , this.y -  2, 38, 38)).setSprite("#");
 
-            } else if (neighbors.get(0).getSprite().equals(" ")) {
+            } else if (neighbors.get(0).getSprite().equals(" ") ||
+                    neighbors.get(0).getSprite().equals("X")) {
                 y -= 1;
                 super.setPosition(x, y);
                 g.update();
@@ -125,7 +127,8 @@ public class Player extends GameObjects implements KeyListener {
                 g.w.get(index(this.x + 1, this.y, 38, 38)).setSprite(" ");
                 g.w.get(index(this.x + 2, this.y, 38, 38)).setSprite("#");
 
-            } else if (neighbors.get(1).getSprite().equals(" ")) {
+            } else if (neighbors.get(1).getSprite().equals(" ") ||
+                    neighbors.get(1).getSprite().equals("X") ){
                 x += 1;
                 super.setPosition(x, y);
                 g.update();
@@ -139,7 +142,8 @@ public class Player extends GameObjects implements KeyListener {
                 g.w.get(index(this.x , this.y + 1, 38, 38)).setSprite(" ");
                 g.w.get(index(this.x , this.y +  2, 38, 38)).setSprite("#");
 
-            } else if (neighbors.get(2).getSprite().equals(" ")) {
+            } else if (neighbors.get(2).getSprite().equals(" ") ||
+                    neighbors.get(2).getSprite().equals("X")) {
                 y += 1;
                 super.setPosition(x, y);
                 g.update();
