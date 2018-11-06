@@ -5,8 +5,6 @@
  */
 package trollgame;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -16,11 +14,12 @@ import java.util.ArrayList;
  * @author Koua
  */
 public class Player extends GameObjects implements KeyListener {
-
+    //Initialize feilds
     int x, y;
     TrollGame g;
     private ArrayList<GameObjects> neighbors = new ArrayList();
 
+    //Initialize feilds
     public Player(int x, int y, String sprite, TrollGame g) {
         super(x, y, sprite);
         this.x = x;
@@ -28,35 +27,37 @@ public class Player extends GameObjects implements KeyListener {
         this.g = g;
         checkNeighbors();
     }
-
-    public void checkNeighbors() {
+    
+    //check and set the negihbors of the player
+    private void checkNeighbors() {
         GameObjects top, right, bottom, left;
         neighbors = new ArrayList();
         //check top
         if (index(this.x, this.y - 1, 38, 27) >= -1) {
 
-            top = g.w.get(index(this.x, this.y - 1, 38, 27));
+            top = g.w.get(index(this.x, this.y - 1, 38, 38));
             this.neighbors.add(top);
         }
         //check right
         if (index(this.x + 1, this.y, 38, 27) >= -1) {
 
-            right = g.w.get(index(this.x + 1, this.y, 38, 27));
+            right = g.w.get(index(this.x + 1, this.y, 38, 38));
             this.neighbors.add(right);
         }
         //check bottom
         if (index(this.x, this.y + 1, 38, 27) >= -1) {
-            bottom = g.w.get(index(this.x, this.y + 1, 38, 27));
+            bottom = g.w.get(index(this.x, this.y + 1, 38, 38));
             this.neighbors.add(bottom);
         }
         //check left
         if (index(this.x - 1, this.y, 38, 27) >= -1) {
-            left = g.w.get(index(this.x - 1, this.y, 38, 27));
+            left = g.w.get(index(this.x - 1, this.y, 38, 38));
             this.neighbors.add(left);
         }
 
     }
-
+    
+    //index of neighbors
     private int index(int x, int y, int row, int col) {
 
         if (x < 0 || x > col - 1 || y < 0 || y > row - 1) {
@@ -72,14 +73,26 @@ public class Player extends GameObjects implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println(e.getKeyCode());
+        
 
         //left
-        if (e.getKeyCode() == 37) {
+        
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        checkNeighbors();
+        g.setupNeighbor();
+        
+       //left
+       if (e.getKeyCode() == 37) {
+           
+           //this will move the block in the adjacent spot
             if (neighbors.get(3).getSprite().equals("#")
-                    && g.w.get(index(this.x - 2, this.y, 38, 27)).getSprite().equals(" ")) {
-                g.w.get(index(this.x - 1, this.y, 38, 27)).setSprite(" ");
-                g.w.get(index(this.x - 2, this.y, 38, 27)).setSprite("#");
+                    && g.w.get(index(this.x - 2, this.y, 38, 38)).getSprite().equals(" ")) {
+                g.w.get(index(this.x - 1, this.y, 38, 38)).setSprite(" ");
+                g.w.get(index(this.x - 2, this.y, 38, 38)).setSprite("#");
 
             } else if (neighbors.get(3).getSprite().equals(" ")) {
                 x -= 1;
@@ -89,10 +102,12 @@ public class Player extends GameObjects implements KeyListener {
         }
         //top
         if (e.getKeyCode() == 38) {
+            
+            //this will move the block in the adjacent spot
             if (neighbors.get(0).getSprite().equals("#")
-                    && g.w.get(index(this.x , this.y- 2, 38, 27)).getSprite().equals(" ")) {
-                g.w.get(index(this.x , this.y - 1, 38, 27)).setSprite(" ");
-                g.w.get(index(this.x , this.y -  2, 38, 27)).setSprite("#");
+                    && g.w.get(index(this.x , this.y- 2, 38, 38)).getSprite().equals(" ")) {
+                g.w.get(index(this.x , this.y - 1, 38, 38)).setSprite(" ");
+                g.w.get(index(this.x , this.y -  2, 38, 38)).setSprite("#");
 
             } else if (neighbors.get(0).getSprite().equals(" ")) {
                 y -= 1;
@@ -102,10 +117,13 @@ public class Player extends GameObjects implements KeyListener {
         }
         //right
         if (e.getKeyCode() == 39) {
+            //this will move the block in the adjacent spot
             if (neighbors.get(1).getSprite().equals("#")
-                    && g.w.get(index(this.x + 2, this.y, 38, 27)).getSprite().equals(" ")) {
-                g.w.get(index(this.x + 1, this.y, 38, 27)).setSprite(" ");
-                g.w.get(index(this.x + 2, this.y, 38, 27)).setSprite("#");
+                    && g.w.get(index(this.x + 2, this.y, 38, 38)).getSprite().equals(" ")) {
+                
+                
+                g.w.get(index(this.x + 1, this.y, 38, 38)).setSprite(" ");
+                g.w.get(index(this.x + 2, this.y, 38, 38)).setSprite("#");
 
             } else if (neighbors.get(1).getSprite().equals(" ")) {
                 x += 1;
@@ -115,10 +133,11 @@ public class Player extends GameObjects implements KeyListener {
         }
         //bottom
         if (e.getKeyCode() == 40) {
+            //this will move the block in the adjacent spot
             if (neighbors.get(2).getSprite().equals("#")
-                    && g.w.get(index(this.x , this.y+ 2, 38, 27)).getSprite().equals(" ")) {
-                g.w.get(index(this.x , this.y + 1, 38, 27)).setSprite(" ");
-                g.w.get(index(this.x , this.y +  2, 38, 27)).setSprite("#");
+                    && g.w.get(index(this.x , this.y+ 2, 38, 38)).getSprite().equals(" ")) {
+                g.w.get(index(this.x , this.y + 1, 38, 38)).setSprite(" ");
+                g.w.get(index(this.x , this.y +  2, 38, 38)).setSprite("#");
 
             } else if (neighbors.get(2).getSprite().equals(" ")) {
                 y += 1;
@@ -126,17 +145,6 @@ public class Player extends GameObjects implements KeyListener {
                 g.update();
             }
         }
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        checkNeighbors();
-        g.setupNeighbor();
-        System.out.println("top: " + neighbors.get(0).getSprite());
-        System.out.println("right: " + neighbors.get(1).getSprite());
-        System.out.println("bottom: " + neighbors.get(2).getSprite());
-        System.out.println("left: " + neighbors.get(3).getSprite());
     }
 
 }

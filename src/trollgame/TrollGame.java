@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.text.*;
 
 /**
  *
@@ -21,9 +20,7 @@ public class TrollGame {
     /**
      * @param args the command line arguments
      */
-    
     //initialize feilds
-    
     private final String maze
             = "#####################################\n"
             + "# #       #       #     #         # #\n"
@@ -48,42 +45,42 @@ public class TrollGame {
             + "# # ### ### ### ##### ### # ##### # #\n"
             + "# #         #     #       #       # #\n"
             + "#X###################################";
-    
+
     //Convert varible above to char
-    private char charmap[];
+    private final char charmap[];
     Canvas map;
-    
+
     ArrayList<Brick> w = new ArrayList<>();
     Player player;
     Random rand = new Random();
-    
+
+    //setup the JCompents that will be need for a windows and initilze any feild
     public TrollGame() {
         this.charmap = maze.toCharArray();
         map = new map();
-        
+
         Objectsetup();
         map.setFocusable(true);
         map.addKeyListener(player);
         JFrame frame = new JFrame();
         frame.setSize(640, 420);
-        w.get(39).isMovable();
-        
         frame.add(map);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
     }
 
+    //setup Object that will go into game
     private void Objectsetup() {
         //setup map
         int count = 0;
         for (int y = 0; y < 23; y++) {
             for (int x = 0; x < 38; x++) {
-
-                if (count >= 873) {
+                //make sure no indexing error accures
+                if (count >= (23 * 38) - 1) {
 
                 } else {
-
+                    //create a new BRICK base on map appove and add it to array
                     w.add(new Brick(x, y, Character.toString(charmap[count])));
                     count++;
                 }
@@ -91,29 +88,31 @@ public class TrollGame {
             }
 
         }
-       
-        
+
         //setup player
-        while(true){
-        int playerPlacement = rand.nextInt(w.size());
-        Brick playerBrick = w.get(playerPlacement);
-        if(playerBrick.getSprite().equals(" ")){
-            player = new Player(playerBrick.getPosition()[0],playerBrick.getPosition()[1],
-                    "0",this);
-            break;
-        }
+        while (true) {
+            //This will randomly place the player on a random unit and make sure
+            //that the unit isnt taken
+            int playerPlacement = rand.nextInt(w.size());
+            Brick playerBrick = w.get(playerPlacement);
+            if (playerBrick.getSprite().equals(" ")) {
+                player = new Player(playerBrick.getPosition()[0], playerBrick.getPosition()[1],
+                        "0", this);
+                break;
+            }
         }
 
     }
     
-    public void setupNeighbor(){
-         for(Brick b: w){
+    //this class is to setup neighbors and this wil run again
+    public void setupNeighbor() {
+        w.forEach((b) -> {
             b.setNeighbors(w);
-            
-        }
+        });
     }
     
-    public void update(){
+    //update to repaint
+    public void update() {
         map.validate();
         map.repaint();
     }
@@ -121,8 +120,8 @@ public class TrollGame {
     public static void main(String[] args) {
         // TODO code application logic here
         TrollGame t = new TrollGame();
-        
-        while(true) {
+
+        while (true) {
             try {
                 t.update();
                 Thread.sleep(1000);
@@ -132,7 +131,7 @@ public class TrollGame {
         }
 
     }
-    
+
     //method of painting
     private class map extends Canvas {
 
@@ -141,13 +140,13 @@ public class TrollGame {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setFont(new java.awt.Font("Courier New", 1, 15));
             g2d.setColor(Color.black);
-            for (Brick wa : w) {
+            w.forEach((wa) -> {
                 g2d.drawString(wa.getSprite(), ((wa.getPosition()[0]) + 1) * 15,
                         ((wa.getPosition()[1]) + 1) * 15);
-            }
+            });
             g2d.setColor(Color.red);
             g2d.setFont(new java.awt.Font("Courier New", 5, 15));
-            g2d.drawString(player.getSprite(),((player.getPosition()[0]) + 1) * 15,
+            g2d.drawString(player.getSprite(), ((player.getPosition()[0]) + 1) * 15,
                     ((player.getPosition()[1]) + 1) * 15);
         }
 

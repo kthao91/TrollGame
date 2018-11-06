@@ -13,11 +13,14 @@ import java.util.ArrayList;
  * @author Koua
  */
 public class Brick extends GameObjects{
+    //intilize feilds
+    private final ArrayList<GameObjects> neighbors = new ArrayList();
+    private final int x;
+    private final int y;
+    private final String sprite;
+    private final boolean movible;
     
-    private ArrayList<GameObjects> neighbors = new ArrayList();
-    private int x,y;
-    private String sprite;
-    private boolean movible;
+    //setup Brick
     public Brick(int x, int y, String sprite) {
         super(x, y, sprite);
         this.x = x;
@@ -25,37 +28,42 @@ public class Brick extends GameObjects{
         this.sprite = sprite;
         this.movible = false;
     }
+    
+    //set Neighbors
     public void setNeighbors(ArrayList<Brick> neighbors){
         GameObjects top,right,bottom,left;
         
         //check top
-        if(index(this.x, this.y-1, 38,27)>= -1){
+        if(index(this.x, this.y-1, 38,27)>= 0){
             
-            top = neighbors.get(index(this.x -1, this.y, 38,27));
+            top = neighbors.get(index(this.x -1, this.y, 38,38));
             this.neighbors.add(top);
         }
         //check right
-        if(index(this.x+1, this.y, 38,27)>= -1){
+        if(index(this.x+1, this.y, 38,27)>= 0){
             
-            right = neighbors.get(index(this.x , this.y+1, 38,27));
+            right = neighbors.get(index(this.x , this.y+1, 38,38));
             this.neighbors.add(right);
         }
         //check bottom
-        if(index(this.x, this.y+1, 38,27)>= -1){
-            bottom = neighbors.get(index(this.x +1, this.y, 38,27));
+        if(index(this.x, this.y+1, 38,27)>= 0){
+            bottom = neighbors.get(index(this.x +1, this.y, 38,38));
             this.neighbors.add(bottom);
         }
         //check left
-        if(index(this.x-1 , this.y, 38,27)>= -1){
-            left = neighbors.get(index(this.x , this.y-1, 38,27));
+        if(index(this.x-1 , this.y, 38,27)>= 0){
+            left = neighbors.get(index(this.x , this.y-1, 38,38));
             this.neighbors.add(left);
         }
         
     }
     
+    //return neighbors
     public ArrayList<GameObjects> getNeighbors(){
         return neighbors;
     }
+    
+    //use to check neighbors
     private int index(int x, int y, int row, int col) {
             int index = x + y * row;
             if (x < 0 || x > col - 1 || y < 0 || y > row - 1 || index >= 873) {
@@ -64,9 +72,5 @@ public class Brick extends GameObjects{
             return index;
         }
     
-    public void isMovable(){
-        for(GameObjects b:this.neighbors){
-            System.out.print(b.getPosition()[0]+ ":" + b.getPosition()[1] + " ");
-        }
-    }
+    
 }
