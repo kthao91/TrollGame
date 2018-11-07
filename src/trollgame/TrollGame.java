@@ -49,7 +49,7 @@ public class TrollGame {
 
     //Convert varible above to char
     private final char charmap[];
-    Canvas map;
+    JPanel map;
     int[] winningPosition = new int[2];
     ArrayList<Brick> w = new ArrayList<>();
     Player player;
@@ -60,6 +60,7 @@ public class TrollGame {
         this.charmap = maze.toCharArray();
         map = new map();
         Objectsetup();
+        map.setDoubleBuffered(true);
         map.setFocusable(true);
         map.addKeyListener(player);
         JFrame frame = new JFrame();
@@ -125,7 +126,8 @@ public class TrollGame {
     
     //update to repaint
     public void update() {
-        map.validate();
+        map.removeAll();
+        map.revalidate();
         map.repaint();
         checkWin();
     }
@@ -146,11 +148,13 @@ public class TrollGame {
     }
 
     //method of painting
-    private class map extends Canvas {
-
+    private class map extends JPanel {
+        
         @Override
         public void paint(Graphics g) {
+            super.paint(g);
             Graphics2D g2d = (Graphics2D) g;
+
             g2d.setFont(new java.awt.Font("Courier New", 1, 15));
             g2d.setColor(Color.black);
             w.forEach((wa) -> {
@@ -166,3 +170,4 @@ public class TrollGame {
     }
 
 }
+
