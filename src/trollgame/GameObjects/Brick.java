@@ -1,4 +1,4 @@
-package trollgame;
+package trollgame.GameObjects;
 
 import java.util.ArrayList;
 

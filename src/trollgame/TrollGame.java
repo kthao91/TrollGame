@@ -4,6 +4,8 @@
  */
 package trollgame;
 
+import trollgame.GameObjects.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -51,8 +53,9 @@ public class TrollGame {
     private final char charmap[];
     JPanel map;
     int[] winningPosition = new int[2];
-    ArrayList<Brick> w = new ArrayList<>();
+    public ArrayList<Brick> w = new ArrayList<>();
     Player player;
+     public ArrayList<Trolls> t = new ArrayList<>();
     Random rand = new Random();
 
     //setup the JCompents that will be need for a windows and initilze any feild
@@ -103,7 +106,24 @@ public class TrollGame {
             if (playerBrick.getSprite().equals(" ")) {
                 player = new Player(playerBrick.getPosition()[0], playerBrick.getPosition()[1],
                         "0", this);
+                
                 break;
+            }
+        }
+        
+        //setup trolls
+        
+        for(int i=0;i<10;i++){
+            while(true){
+            int trollPlacement = rand.nextInt(w.size());
+            Brick trollBrick = w.get(trollPlacement);
+            if (trollBrick.getSprite().equals(" ")) {
+                Trolls t = new Trolls(trollBrick.getPosition()[0], trollBrick.getPosition()[1],
+                        "T");
+                
+                this.t.add(t);
+                break;
+            }
             }
         }
 
@@ -160,6 +180,11 @@ public class TrollGame {
             w.forEach((wa) -> {
                 g2d.drawString(wa.getSprite(), ((wa.getPosition()[0]) + 1) * 15,
                         ((wa.getPosition()[1]) + 1) * 15);
+            });
+            t.forEach((troll) ->{
+                g2d.drawString(troll.getSprite(), ((troll.getPosition()[0]) + 1) * 15,
+                        ((troll.getPosition()[1]) + 1) * 15);
+            
             });
             g2d.setColor(Color.red);
             g2d.setFont(new java.awt.Font("Courier New", 5, 15));

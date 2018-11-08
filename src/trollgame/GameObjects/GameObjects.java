@@ -1,4 +1,4 @@
-package trollgame;
+package trollgame.GameObjects;
 
 /*
  *This will be the base class for all the objects in the game.
