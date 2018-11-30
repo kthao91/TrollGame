@@ -71,7 +71,7 @@ public class TrollGame {
         frame.add(map);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-
+            test
     }
 
     //setup Object that will go into game
