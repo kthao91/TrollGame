@@ -20,10 +20,10 @@ public class Trolls extends GameObjects{
         this.x = x;
         this.y = y;
         this.map = map;
-        checkNeighbors();
+        checkNeighbors(map);
     }
     
-    public void checkNeighbors(){
+    public void checkNeighbors(ArrayList<Brick> map){
         GameObjects top, right, bottom, left;
         neighbors = new ArrayList();
         //check top
@@ -50,7 +50,7 @@ public class Trolls extends GameObjects{
         }
     }
     
-    public void moveTrolls(Brick walls, int targetX, int targetY){
+    public void moveTrolls(int targetX, int targetY,ArrayList<Brick> map){
         
     }
     

@@ -149,6 +149,9 @@ public class TrollGame {
         map.removeAll();
         map.revalidate();
         map.repaint();
+        for(Trolls tr:t){
+            tr.moveTrolls(0, 0, w);
+        }
         checkWin();
     }
 
