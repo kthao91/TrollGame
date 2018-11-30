@@ -71,7 +71,7 @@ public class TrollGame {
         frame.add(map);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-            test
+        
     }
 
     //setup Object that will go into game
@@ -119,7 +119,7 @@ public class TrollGame {
             Brick trollBrick = w.get(trollPlacement);
             if (trollBrick.getSprite().equals(" ")) {
                 Trolls t = new Trolls(trollBrick.getPosition()[0], trollBrick.getPosition()[1],
-                        "T");
+                        "T",w);
                 
                 this.t.add(t);
                 break;

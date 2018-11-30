@@ -58,27 +58,14 @@ public class Player extends GameObjects implements KeyListener {
 
     }
     
-    //index of neighbors
-    private int index(int x, int y, int row, int col) {
-
-        if (x < 0 || x > col - 1 || y < 0 || y > row - 1) {
-            return 0;
-        }
-        return x + y * row;
-    }
+    
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        
-
-        //left
-        
-
     }
 
     @Override

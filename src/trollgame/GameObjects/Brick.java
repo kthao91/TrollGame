@@ -64,13 +64,8 @@ public class Brick extends GameObjects{
     }
     
     //use to check neighbors
-    private int index(int x, int y, int row, int col) {
-            int index = x + y * row;
-            if (x < 0 || x > col - 1 || y < 0 || y > row - 1 || index >= 873) {
-                return 0;
-            }
-            return index;
-        }
+
+   
     
     
 }
